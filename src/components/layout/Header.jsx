@@ -9,7 +9,7 @@ export default function Header() {
     return (
         <header className="
             mt-7.25
-            md-4.75
+            mb-4.75
         ">
             <nav>
                 <Container>

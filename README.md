@@ -863,7 +863,7 @@ const cartItems = 3;
 ```jsx
 <header className="
     mt-7.25
-    md-4.75
+    mb-4.75
 ">
 <Container />
 </header>
@@ -1010,4 +1010,157 @@ const Banner = () => {
 export default Banner
 ```
 
-#### Lesson - 3: 
+#### Lesson - 3: REACT Slick
+
+1st,
+```bash
+npm install react-slick --save
+```
+
+2nd,
+```bas
+npm install slick-carousel --save
+```
+
+3rd,
+*`Banner.jsx`*
+```jsx
+import Image from "../common/Image"
+import { BannerData } from "../../api/bannerdata"
+import SliderImport from "react-slick";
+import "slick-carousel/slick/slick.css";
+
+const Slider = SliderImport.default || SliderImport;
+
+const Banner = () => {
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
+
+    return (
+        <div>
+            <Slider {...settings}>
+                {
+                    BannerData?.map((item) => (
+                        <Image key={item.id} src={item.banner} />
+                    ))
+                }
+            </Slider>
+        </div>
+    )
+}
+
+export default Banner
+```
+
+### 7. React Slick Slider Design
+
+*`Banner.jsx`*
+```jsx
+import Image from "../common/Image"
+import { BannerData } from "../../api/bannerdata"
+import SliderImport from "react-slick";
+import "slick-carousel/slick/slick.css";
+
+const Slider = SliderImport.default || SliderImport;
+
+const Banner = () => {
+
+    const settings = {
+        dots: true,
+        arrows: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        appendDots: dots => (
+            <div>
+                <ul
+                    className="
+                        flex 
+                        gap-5 
+                        absolute
+                        bottom-14.5
+                        left-48.75
+                    "
+                    style={{ margin: "0px" }}
+                >
+                    {" "}{dots}{" "}
+                </ul>
+            </div>
+        ),
+        customPaging: () => (
+            <div
+                className="
+                    bg-[#ddc2b9]
+                    h-1.5
+                    w-1.5
+                    rounded-full
+                "
+            >
+            </div>
+        )
+    };
+
+    return (
+        <div className="
+            mx-15
+        ">
+            <Slider {...settings}>
+                {
+                    BannerData?.map((item) => (
+                        <Image
+                            className="
+                                w-full
+                                text-center
+                            "
+                            key={item.id}
+                            src={item.banner}
+                        />
+                    ))
+                }
+            </Slider>
+        </div>
+    )
+}
+
+export default Banner
+```
+
+*`index.css`*
+```css
+.slick-dots .slick-active {
+    @apply
+        border-primary-black
+        flex
+        h-7.5
+        w-7.5
+        items-center
+        justify-center
+        rounded-full
+        border
+}
+
+.slick-dots ul {
+    @apply
+        flex
+        items-center
+        justify-center
+}
+
+.slick-active div {
+    @apply
+        bg-primary-black;
+}
+```
+
+*Display*
+
+![alt text](<markdown images/uomo-5.png>)
+
+#### 8.

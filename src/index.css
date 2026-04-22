@@ -16,7 +16,7 @@
     @apply
         ml-14
         flex
-        gap-11
+        gap-11;
 }
 
 .list-item {
@@ -35,5 +35,29 @@
         after:w-0 
         after:duration-300
         after:content-['']
-        hover:after:w-[40%]
+        hover:after:w-[40%];
+}
+
+.slick-dots .slick-active {
+    @apply
+        border-primary-black
+        flex
+        h-7.5
+        w-7.5
+        items-center
+        justify-center
+        rounded-full
+        border
+}
+
+.slick-dots ul {
+    @apply
+        flex
+        items-center
+        justify-center
+}
+
+.slick-active div {
+    @apply
+        bg-primary-black;
 }
