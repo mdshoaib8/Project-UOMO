@@ -25,7 +25,8 @@
         text-primary-black 
         after:bg-primary-black 
         relative 
-        text-sm 
+        text-sm
+        cursor-pointer 
         leading-6 
         font-medium 
         after:absolute 

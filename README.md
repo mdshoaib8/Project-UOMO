@@ -1219,3 +1219,259 @@ export default Banner
 *Display*
 
 ![alt text](<markdown images/uomo-6.png>)
+
+## Lesson - 4: (Class - 3)
+
+[Project UOMO Figma Link](https://www.figma.com/design/Ee7Ax8QPZ4BBiG9lSLHINH/Uomo_Theme--Copy---Copy---Copy-?node-id=0-1&p=f&t=csAyg0VpPePIU0N9-0)
+
+### Lesson - 4.1: Make a `Category.jsx` component inside `home` folder
+
+*File Tree*
+```
+Project UOMO
+│  
+│   ├── 📁 components
+│   │   ├── 📁 common
+│   │   │   └── 📄 Image.jsx
+│   │   ├── 📁 home
+│   │   │   ├── 📄 Banner.jsx
+│   │   │   └── 📄 Category.jsx
+```
+
+*`Category.jsx`*
+```jsx
+export default function Category() {
+    return (
+    <>
+        <h1>Category</h1>
+    </>
+)
+}
+```
+
+*`Home.jsx`*
+```jsx
+import Banner from "../home/Banner"
+import Category from "../home/Category"
+
+const Home = () => {
+    return (
+        <>
+            <Banner />
+            <Category />
+        </>
+    )
+}
+
+export default Home
+```
+
+### Lesson - 4.2: Make `categorydata.js` API and link it with `Category.jsx`
+
+*File Tree*
+```
+Project UOMO
+├── 📁 src
+│   ├── 📁 api
+│   │   ├── 📄 bannerdata.js
+│   │   ├── 📄 categorydata.js
+│   │   └── 📄 navbardata.js
+```
+
+*`categorydata.js`*
+```js
+import MenImage from "../assets/images/men.png"
+import WomenImage from "../assets/images/woman.png"
+import KidsImage from "../assets/images/kids.png"
+import E_Gift from "../assets/images/e-gift.png"
+
+export const CategoryData = [
+    {
+        id: 1,
+        name: "WOMEN",
+        link: "/women",
+        image: MenImage,
+    },
+    {
+        id: 2,
+        name: "MEN",
+        link: "/men",
+        image: WomenImage,
+    },
+    {
+        id: 3,
+        name: "KIDS",
+        link: "/kids",
+        image: KidsImage,
+    },
+    {
+        id: 4,
+        name: "E-GIFT CARDS",
+        link: "/e-gift",
+        image: E_Gift,
+    },
+    
+]
+```
+
+*`Category.jsx`*
+```jsx
+import { CategoryData } from "../../api/categorydata"
+
+export default function Category() {
+    return (
+    <>
+        <h1>Category</h1>
+    </>
+)
+}
+```
+
+### Lesson - 4.3: Call API from `Category.jsx` using `map()` and `?.`
+
+*Optional chaining (?.) is a JavaScript operator (introduced in ES2020) that allows you to safely access deeply nested object properties, call functions, or access array elements without manually checking if each level exists.*
+
+*`Home.jsx`*
+```jsx
+import Banner from "../home/Banner"
+import Category from "../home/category/Category"
+
+const Home = () => {
+    return (
+        <>
+            <Banner />
+            <Category />
+        </>
+    )
+}
+
+export default Home
+```
+
+*`Card.jsx`*
+```jsx
+import { Link } from "react-router-dom";
+import Image from "../../common/Image";
+
+const Card = ({ item }) => {
+    return (
+        <div
+            key={item.id}
+            className={`h-full w-full ${item.id == 1 && "col-span-2 row-span-2"} ${item.id == 2 && "col-span-2 row-span-1"} relative`}
+        >
+            <Image className="h-full w-full" src={item.image} alt={item.name} />
+            <div className="absolute bottom-10 left-10">
+                <h4 className="font-jost text-primary-black text-sm leading-6 font-normal">
+                    HOT LIST
+                </h4>
+                <h2 className="font-jost text-[24px] font-medium">
+                    <span className="font-bold">{item.name}</span> COLLECTION
+                </h2>
+                <Link
+                    className="font-jost text-primary-black after:bg-primary-black relative text-sm leading-6 font-medium after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:duration-300 after:content-[''] hover:after:w-[40%]"
+                    to={item.link}
+                >
+                    SHOP NOW
+                </Link>
+            </div>
+        </div>
+    );
+};
+
+export default Card;
+
+```
+
+*`Category.jsx`*
+```jsx
+import { CategoryData } from "../../../api/categorydata";
+import Container from "../../ui/Container";
+import Card from "./Card";
+
+export default function Category() {
+    return (
+        <section className="mt-25.25">
+            <Container>
+                <div className="grid h-150 grid-cols-4 grid-rows-2 gap-7.5">
+                    {CategoryData?.map((item) => (
+                        <Card key={item.id} item={item} />
+                    ))}
+                </div>
+            </Container>
+        </section>
+    );
+}
+```
+
+*File Tree*
+```
+Project UOMO
+├── 📁 markdown images
+│   ├── 🖼️ uomo-1.png
+│   ├── 🖼️ uomo-2.png
+│   ├── 🖼️ uomo-3.png
+│   ├── 🖼️ uomo-4.png
+│   ├── 🖼️ uomo-5.png
+│   └── 🖼️ uomo-6.png
+├── 📁 public
+│   ├── 📁 images
+│   │   ├── 🖼️ 001-loupe.svg
+│   │   ├── 🖼️ 002-user.svg
+│   │   ├── 🖼️ 003-shopping-bag.svg
+│   │   ├── 🖼️ 004-heart.svg
+│   │   ├── 🖼️ facebook_ icon.svg
+│   │   ├── 🖼️ instagram_icon.svg
+│   │   ├── 🖼️ logo.png
+│   │   ├── 🖼️ nav_icon.svg
+│   │   ├── 🖼️ printerest_icon.svg
+│   │   └── 🖼️ twitter_ icon.svg
+│   └── 🖼️ favicon-16x16.png
+├── 📁 src
+│   ├── 📁 api
+│   │   ├── 📄 bannerdata.js
+│   │   ├── 📄 categorydata.js
+│   │   └── 📄 navbardata.js
+│   ├── 📁 assets
+│   │   └── 📁 images
+│   │       ├── 🖼️ banner.png
+│   │       ├── 🖼️ e-gift.png
+│   │       ├── 🖼️ kids.png
+│   │       ├── 🖼️ men.png
+│   │       └── 🖼️ woman.png
+│   ├── 📁 components
+│   │   ├── 📁 common
+│   │   │   └── 📄 Image.jsx
+│   │   ├── 📁 home
+│   │   │   ├── 📁 category
+│   │   │   │   ├── 📄 Card.jsx
+│   │   │   │   └── 📄 Category.jsx
+│   │   │   └── 📄 Banner.jsx
+│   │   ├── 📁 layout
+│   │   │   ├── 📄 Footer.jsx
+│   │   │   ├── 📄 Header.jsx
+│   │   │   └── 📄 RootLayout.jsx
+│   │   ├── 📁 pages
+│   │   │   ├── 📄 About.jsx
+│   │   │   ├── 📄 Home.jsx
+│   │   │   └── 📄 Test.jsx
+│   │   └── 📁 ui
+│   │       └── 📄 Container.jsx
+│   ├── 🎨 App.css
+│   ├── 📄 App.jsx
+│   ├── 🎨 index.css
+│   └── 📄 main.jsx
+├── ⚙️ .gitignore
+├── ⚙️ .prettierrc
+├── 📝 README.md
+├── 📄 eslint.config.js
+├── 🌐 index.html
+├── ⚙️ package-lock.json
+├── ⚙️ package.json
+└── 📄 vite.config.js
+```
+
+*Display*
+
+![alt text](<markdown images/uomo-7.png>)
+
+### Lesson - 4.4: (00:52:03)
